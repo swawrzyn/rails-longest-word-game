@@ -1,2 +1,12 @@
-<h1>Games#score</h1>
-<p>Find me in app/views/games/score.html.erb</p>
+<h2>Result</h2>
+<p><%= @start_time %></p>
+<p>You answered in: <%= @total_time %> seconds!</p>
+<% if !@real_word %>
+<p>Sorry, but <strong><%= @word.upcase %></strong> does not seem to be a valid word</p>
+<% elsif !@can_build %>
+<p>Sorry, but <strong><%= @word.upcase %></strong> can't be built out of <%= @letters.join(', ') %></p>
+<% else %>
+<p><strong>Congratulations!</strong> <%= @word.upcase %> is a valid English word! Your score is: <strong><%= @score %></strong></p>
+<% end %>
+
+<%= link_to "Play again", new_path %>
