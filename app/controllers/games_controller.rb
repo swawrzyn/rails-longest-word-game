@@ -7,6 +7,7 @@ class GamesController < ApplicationController
     @letters = []
     @start_time = Time.now
     10.times { @letters << ('A'..'Z').to_a.sample }
+    session[:scores] ||= []
   end
 
   def score
@@ -14,6 +15,7 @@ class GamesController < ApplicationController
     url = open("https://wagon-dictionary.herokuapp.com/#{@word.downcase}").read
     @letters = params['letters'].split
     @total_time =(Time.now - Time.parse(params['start_time'])).round(2)
+    @score = 0
 
     def canBuild?(letters, guess)
       letter_hash = Hash.new(0)
@@ -24,6 +26,9 @@ class GamesController < ApplicationController
 
     @real_word = JSON.parse(url)['found']
     @can_build = canBuild?(@letters, @word)
-    @score = ((@word.length * 1/@total_time) * 100).floor
+    @score = (((@word.length**2) * (1 / @total_time)) * 100).floor if @real_word && @can_build
+
+    session[:scores].unshift(@score)
+    @scores = session[:scores].sort.reverse
   end
 end
