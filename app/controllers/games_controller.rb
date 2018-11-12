@@ -4,9 +4,8 @@ require 'time'
 
 class GamesController < ApplicationController
   def new
-    @letters = []
+    @letters = Array.new(10) { ('A'..'Z').to_a.sample }
     @start_time = Time.now
-    10.times { @letters << ('A'..'Z').to_a.sample }
     session[:scores] ||= []
   end
 
@@ -14,7 +13,7 @@ class GamesController < ApplicationController
     @word = params['word']
     url = open("https://wagon-dictionary.herokuapp.com/#{@word.downcase}").read
     @letters = params['letters'].split
-    @total_time =(Time.now - Time.parse(params['start_time'])).round(2)
+    @total_time = (Time.now - Time.parse(params['start_time'])).round(2)
     @score = 0
 
     def canBuild?(letters, guess)

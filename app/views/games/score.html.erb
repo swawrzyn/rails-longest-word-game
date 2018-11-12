@@ -6,7 +6,7 @@
 <% elsif !@can_build %>
 <p>Sorry, but <strong><%= @word.upcase %></strong> can't be built out of <%= @letters.join(', ') %></p>
 <% else %>
-<p><strong>Congratulations!</strong> <%= @word.upcase %> is a valid English word! Your score is: <strong><%= @score %></strong></p>
+<p><strong>Congratulations!</strong> <%= @word.upcase %> is a valid English word! Your score is: <strong><%= @score %></strong>. It ranks <b><%= @scores.find_index(@score) + 1 %></b> of <b><%= @scores.length %></b>!</p>
 <% end %>
 
 <table class="table table-striped table-bordered">
@@ -14,6 +14,7 @@
 <% @scores[0..4].each_with_index do |score, index| %>
   <tr><td><%= index + 1 %></td><td><%= score %></td></tr>
 <% end %>
+  <tr><td><b>TOTAL</b></td><td><b><%= @scores.sum %></b></td></tr>
 </table>
 
 <%= link_to "Play again", new_path %>

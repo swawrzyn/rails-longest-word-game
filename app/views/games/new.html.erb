@@ -1,11 +1,15 @@
 <div class="container">
   <div class="row">
       <div class="col-sm-1"></div>
+      <% delay = 0.1 %>
     <% @letters.each do |letter| %>
+
       <div class="col-xs-1">
         <div class="letter-card"><%= letter %></div>
       </div>
+      <% delay += 0.1 %>
     <% end %>
+
   </div>
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">

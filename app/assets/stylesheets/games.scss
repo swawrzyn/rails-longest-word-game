@@ -21,3 +21,13 @@
   background-color: #81D8D0;
   color: white;
 }
+
+.btn.btn-default:hover {
+  background-color: #81D8D0;
+  opacity: 0.5;
+}
+
+.btn.btn-default:focus {
+  background-color: #81D8D0;
+  opacity: 0.5;
+}
